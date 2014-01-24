@@ -39,6 +39,16 @@ define(function(require) {
             this.$el.imageready(_.bind(function() {
                 this.setReadyStatus();
             }, this));
+            if(this.isComplete())
+                this.$el.addClass('complete').removeClass('incomplete');
+            else
+                this.$el.addClass('incomplete').removeClass('complete');
+        },
+
+        isComplete: function() {
+            return this.model.getChildren().every(function (item) {
+                return item.get('_isComplete');
+            });
         }
 
     }, {
