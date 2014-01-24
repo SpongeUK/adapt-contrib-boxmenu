@@ -1,12 +1,13 @@
 {
-  "name": "adapt-contrib-boxmenu",
+  "name": "adapt-lockedBoxMenu",
   "version": "0.0.0",
-  "homepage": "https://github.com/adaptlearning/adapt-contrib-boxmenu",
+  "homepage": "https://github.com/SpongeUK/adapt-lockedBoxMenu",
   "authors": [
+    "Chris Jones <chris.jones@spongeuk.com>",
     "Daryl Hedley <darylhedley@hotmail.com>"
   ],
-  "description": "A core bundled menu",
-  "main": "js/adapt-contrib-boxmenu.js",
+  "description": "A locked menu",
+  "main": "js/adapt-lockedBoxMenu.js",
   "keywords": [
     "adapt-plugin",
     "adapt-menu"
