@@ -1,13 +1,13 @@
 {
-  "name": "adapt-lockedBoxMenu",
+  "name": "adapt-sequentialBoxMenu",
   "version": "0.0.0",
-  "homepage": "https://github.com/SpongeUK/adapt-lockedBoxMenu",
+  "homepage": "https://github.com/SpongeUK/adapt-sequentialBoxMenu",
   "authors": [
     "Chris Jones <chris.jones@spongeuk.com>",
     "Daryl Hedley <darylhedley@hotmail.com>"
   ],
-  "description": "A locked menu",
-  "main": "js/adapt-lockedBoxMenu.js",
+  "description": "A menu that unlocks each item sequentially when all decendants are Complete.",
+  "main": "js/adapt-sequentialBoxMenu.js",
   "keywords": [
     "adapt-plugin",
     "adapt-menu"

@@ -19,6 +19,8 @@
 			<a href="#/id/{{_id}}" class="{{#if _isVisited}}visited{{/if}}">
 				<span>{{{linkText}}}</span>
 			</a>
+		{{else}}
+			<span>{{{lockText}}}</span>
 		{{/unless}}
 	</div>
 </div>
