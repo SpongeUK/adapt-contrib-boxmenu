@@ -7,11 +7,16 @@ define(function(require) {
     var BoxMenuView = MenuView.extend({
         
         postRender: function() {
-            var nthChild = 0;
+            var nthChild = 0,
+                locked = false;
+
             this.model.getChildren().each(function(item) {
                 if(item.get('_isAvailable')) {
                     nthChild ++;
-                    this.$('.menu-container-inner').append(new BoxMenuItemView({model:item, nthChild:nthChild}).$el);
+                    item.set('_isLocked', locked);
+                    var menuItem = new BoxMenuItemView({model:item, nthChild:nthChild});
+                    this.$('.menu-container-inner').append(menuItem.$el);
+                    locked = !menuItem.isComplete() || locked;
                 }
             });
         }
@@ -27,7 +32,9 @@ define(function(require) {
                 'menu-item',
                 'menu-item-' + this.model.get('_id') ,
                 'nth-child-' + this.options.nthChild,
-                this.options.nthChild % 2 === 0  ? 'nth-child-even' : 'nth-child-odd'
+                this.options.nthChild % 2 === 0  ? 'nth-child-even' : 'nth-child-odd',
+                this.model.get('_isLocked') ? 'locked' : 'unlocked',
+                this.isComplete() ? 'complete' : 'incomplete'
             ].join(' ');
         },
 
@@ -39,14 +46,12 @@ define(function(require) {
             this.$el.imageready(_.bind(function() {
                 this.setReadyStatus();
             }, this));
-            if(this.isComplete())
-                this.$el.addClass('complete').removeClass('incomplete');
-            else
-                this.$el.addClass('incomplete').removeClass('complete');
         },
 
         isComplete: function() {
-            return this.model.getChildren().every(function (item) {
+            console.log('Checking', this.model.get('_id'));
+            return this.model.findDescendants('components').every(function (item) {
+                console.log('isComplete', item.get('_id'), item.get('_isComplete'));
                 return item.get('_isComplete');
             });
         }
