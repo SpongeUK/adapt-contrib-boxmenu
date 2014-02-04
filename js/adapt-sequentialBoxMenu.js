@@ -50,7 +50,6 @@ define(function(require) {
 
         isComplete: function() {
             return this.model.findDescendants('components').every(function (item) {
-                console.log('isComplete', item.get('_id'), item.get('_isComplete'));
                 return item.get('_isComplete');
             });
         }

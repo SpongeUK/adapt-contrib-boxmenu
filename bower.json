@@ -1,5 +1,6 @@
 {
   "name": "adapt-sequentialBoxMenu",
+  "repository": "git://github.com/SpongeUK/adapt-sequentialBoxMenu.git",
   "version": "0.0.0",
   "homepage": "https://github.com/SpongeUK/adapt-sequentialBoxMenu",
   "authors": [
