@@ -1,8 +1,10 @@
 define(function(require) {
 
-    var Backbone = require('backbone');
-    var Adapt = require('coreJS/adapt');
-    var MenuView = require('coreViews/menuView');
+    var Backbone = require('backbone'),
+        Adapt = require('coreJS/adapt'),
+        MenuView = require('coreViews/menuView'),
+        _ = require('underscore'),
+        $ = require('jquery');
     
     var BoxMenuView = MenuView.extend({
         
@@ -19,6 +21,13 @@ define(function(require) {
                     locked = !menuItem.isComplete() || locked;
                 }
             });
+
+            _.delay(function () {
+                var $menuItem = this.$('.unlocked.menu-item').last(),
+                    menuItemMiddle = $menuItem.height()/2,
+                    windowMiddle = $(window).height()/2;
+                $.scrollTo($menuItem, 300, { offset: -windowMiddle });
+            }, 300);
         }
 
     }, {
