@@ -23,10 +23,12 @@ define(function(require) {
             });
 
             _.delay(function () {
-                var $menuItem = this.$('.unlocked.menu-item').last(),
-                    menuItemMiddle = $menuItem.height()/2,
-                    windowMiddle = $(window).height()/2;
-                $.scrollTo($menuItem, 300, { offset: -windowMiddle });
+                var $menuItem = this.$('.unlocked.menu-item:not(.nth-child-1)').last(),
+                    navigationHeight = $('.location-menu .navigation').height();
+
+                if($menuItem.length) {
+                    $.scrollTo($menuItem, 300, { offset: -(navigationHeight + 4)});
+                }
             }, 300);
         }
 
