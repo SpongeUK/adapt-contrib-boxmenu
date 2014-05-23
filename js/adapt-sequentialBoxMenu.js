@@ -1,9 +1,9 @@
 define(function(require) {
 
-    var Backbone = require('backbone'),
-        Adapt = require('coreJS/adapt'),
-        MenuView = require('coreViews/menuView'),
-        _ = require('underscore'),
+    var Backbone = require('backbone');
+    var Adapt = require('coreJS/adapt');
+    var MenuView = require('coreViews/menuView');
+    var _ = require('underscore'),
         $ = require('jquery');
     
     var BoxMenuView = MenuView.extend({
@@ -50,7 +50,7 @@ define(function(require) {
         },
 
         preRender: function() {
-
+            this.model.getCompleteComponentsAsPercentage();
         },
 
         postRender: function() {
