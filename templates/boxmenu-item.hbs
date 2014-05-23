@@ -3,13 +3,13 @@
 		{{#unless _isLocked}}
 			<a href="#/id/{{_id}}" class="{{#if _isVisited}}visited{{/if}}">
 		{{/unless}}
-		<img src="{{graphic.src}}" alt="{{graphic.alt}}" />
+		<img src="{{_graphic.src}}" alt="{{_graphic.alt}}" />
 		{{#unless _isLocked}}
 			</a>
 		{{/unless}}
 	</div>
 	<div class="menu-item-title">
-		<h2 class="menu-item-title-inner">{{{title}}}</h2>
+		<h2 class="menu-item-title-inner">{{{displayTitle}}}</h2>
 	</div>
 	<div class="menu-item-body">
 		<div class="menu-item-body-inner">{{{body}}}</div>
@@ -22,5 +22,11 @@
 		{{else}}
 			<span>{{{lockText}}}</span>
 		{{/unless}}
+		<span class="menu-item-duration">Duration: {{{duration}}}</span>
+	</div>
+	<div class="menu-item-progress">
+		<div class="menu-item-progress-indicator">
+			<div class="menu-item-progress-indicator-bar" style="width:{{completedChildrenAsPercentage}}%"></div>
+		</div>
 	</div>
 </div>
