@@ -6,17 +6,19 @@ define([
     var BoxMenuView = MenuView.extend({
 
         preRender: function() {
-            var blLock = false;
+            if( this.model.get( '_globals' )._menu._boxmenu.sequential === true ) {
+                var blLock = false;
 
-            this.model.getChildren().each(
-                function( objMenuItem, intIndex ) {
-                    objMenuItem.set( '_isLocked', blLock );
+                this.model.getChildren().each(
+                    function( objMenuItem ) {
+                        objMenuItem.set( '_isLocked', blLock );
 
-                    if( !objMenuItem.get( '_isComplete' ) ) {
-                        blLock = true;
+                        if( !objMenuItem.get( '_isComplete' ) ) {
+                            blLock = true;
+                        }
                     }
-                }
-            );
+                );
+            }
 
             if( !$( 'html' ).is( '.ie6, .ie7, .ie8' ) ) {
                 this.$el.css( 'opacity', 0 );
@@ -42,15 +44,24 @@ define([
 
     var BoxMenuItemView = MenuView.extend({
 
+        events: {
+            'click .menu-item-button a.disabled': 'onClick'
+        },
+
         className: function() {
             var nthChild = this.model.get("_nthChild");
             return [
                 'menu-item',
                 'menu-item-' + this.model.get('_id') ,
+                this.model.get('_isLocked') ? 'locked' : 'unlocked',
                 this.model.get('_classes'),
                 'nth-child-' + nthChild,
                 nthChild % 2 === 0 ? 'nth-child-even' : 'nth-child-odd'
             ].join(' ');
+        },
+
+        onClick: function( e ) {
+            e.preventDefault();
         },
 
         preRender: function() {
