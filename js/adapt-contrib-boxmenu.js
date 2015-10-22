@@ -20,6 +20,8 @@ define([
                 );
             }
 
+            MenuView.__super__.preRender();
+
             if( !$( 'html' ).is( '.ie6, .ie7, .ie8' ) ) {
                 this.$el.css( 'opacity', 0 );
             }
@@ -45,7 +47,7 @@ define([
     var BoxMenuItemView = MenuView.extend({
 
         events: {
-            'click .menu-item-button a.disabled': 'onClick'
+            'click button' : 'onClickMenuItemButton'
         },
 
         className: function() {
@@ -60,19 +62,25 @@ define([
             ].join(' ');
         },
 
-        onClick: function( e ) {
-            e.preventDefault();
-        },
-
         preRender: function() {
             this.model.checkCompletionStatus();
             this.model.checkInteractionCompletionStatus();
         },
 
         postRender: function() {
-            this.$el.imageready(_.bind(function() {
+            var graphic = this.model.get('_graphic');
+            if (graphic && graphic.src && graphic.src.length > 0) {
+                this.$el.imageready(_.bind(function() {
+                    this.setReadyStatus();
+                }, this));
+            } else {
                 this.setReadyStatus();
-            }, this));
+            }
+        },
+
+        onClickMenuItemButton: function(event) {
+            if(event && event.preventDefault) event.preventDefault();
+            Backbone.history.navigate('#/id/' + this.model.get('_id'), {trigger: true});
         }
 
     }, {
