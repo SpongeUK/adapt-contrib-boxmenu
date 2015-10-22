@@ -1,9 +1,29 @@
-define(function(require) {
-
-    var Adapt = require('coreJS/adapt');
-    var MenuView = require('coreViews/menuView');
+define([
+    'coreJS/adapt',
+    'coreViews/menuView'
+], function(Adapt, MenuView) {
 
     var BoxMenuView = MenuView.extend({
+
+        preRender: function() {
+            var blLock = false;
+
+            this.model.getChildren().each(
+                function( objMenuItem, intIndex ) {
+                    objMenuItem.set( '_isLocked', blLock );
+
+                    if( !objMenuItem.get( '_isComplete' ) ) {
+                        blLock = true;
+                    }
+                }
+            );
+
+            if( !$( 'html' ).is( '.ie6, .ie7, .ie8' ) ) {
+                this.$el.css( 'opacity', 0 );
+            }
+
+            this.listenTo( this.model, 'change:_isReady', this.isReady );
+        },
 
         postRender: function() {
             var nthChild = 0;
