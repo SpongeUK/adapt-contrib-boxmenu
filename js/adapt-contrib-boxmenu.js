@@ -6,7 +6,7 @@ define([
     var BoxMenuView = MenuView.extend({
 
         preRender: function() {
-            if( this.model.get( '_globals' )._menu._boxmenu.sequential === true ) {
+            if( this.model.get( '_globals' )._menu._boxmenu._sequential === true ) {
                 var blLock = false;
 
                 this.model.getChildren().each(
